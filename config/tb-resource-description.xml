@@ -1,0 +1,5 @@
+<resource>
+    <name>ToxBank Users</name>
+    <abbreviation>TBU</abbreviation>
+    <queryURL>http://toxbanktest1.opentox.org:8080/toxbank/</queryURL>
+</resource>
