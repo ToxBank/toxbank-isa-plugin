@@ -94,32 +94,36 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.2.0</version>
+                <version>2.0.0</version>
                 <extensions>true</extensions>
 
                 <configuration>
                     <instructions>
                         <Import-Package>
+                                org.apache.commons.logging.*,
+                                !org.apache.axis.*,
                         		!com.sun.jdmk.*,
                         		!javax.mail.*,
-                        		!org.junit.*,
+                        		!org.junit.*, <!-- Why junit runtime?  -->
                         		!com.sun.msv.*,
                         		!javax.jms.*,
-                        		!junit.*,
-                        		!org.relaxng.*,
-                        		!org.apache.xml.resolver.readers.*,
-                        		!com.hp.hpl.jena.util.junit.*,
+                        		!junit.*, <!-- uk.ebi.ac:ols has compile junit dependency -->
+                        		!org.relaxng.*, 
+                        		!org.apache.xml.resolver.*,
+                        		!com.hp.hpl.jena.util.junit.*, <!-- Why junit runtime?  -->
+                        		!javax.jmdns.*,
+                        		!sun.io.*,
+                        		!com.hp.hpl.jena.sparql.modify.op.*,  <!-- This is not found in arq after version 2.8.3  -->
+                        		!com.ibm.uvm.tools.*,
+                        		!com.hp.hpl.jena.sparql.lang.sparql.*, <!-- Who is using ancient arq-2* ??? -->
+                        		!org.apache.log.*, <!-- What's this ???  -->
                         		*</Import-Package> 
-                        <Export-Package>net.toxbank.isa.creator.plugin
-                        </Export-Package>
+                        <Export-Package>net.toxbank.isa.creator.plugin</Export-Package>
                         <Bundle-Activator>net.toxbank.isa.creator.plugin.Activator</Bundle-Activator>
                         <Embed-Dependency>
-                        	*;scope=compile|runtime
-                         <!-- 
                 			toxbank-client-java;scope=compile,                           
                 			httpclient;scope=compile,
                 			httpcore;scope=compile,
-                			commons-logging;scope=compile,
                 			commons-codec;scope=compile,
                 			httpmime;scope=compile,
                 			apache-mime4j;scope=compile,
@@ -127,7 +131,6 @@
                 			jena;version=2.6.4;scope=compile,
                 			icu4j;scope=compile,
                 			xercesImpl;scope=compile,
-                			
                 			arq;version=2.8.7;scope=compile,
                 			wstx-asl;scope=compile,
                 			stax-api;version=1.0.1;scope=compile,
@@ -138,24 +141,9 @@
                 			opentox-opensso;scope=compile,
                 			jutils;scope=compile,
                 			xerces;scope=compile,
-                			
-                			xml-commons-resolver;scope=compile,
-                			xml-resolver;scope=compile,
- -->
-                			<!-- 
-                			xml-apis;scope=compile,
-                			resolver;scope=compile,
-							xerces;scope=compile,    
-							slf4j-log4j12;scope=compile,            			
-                			resolver;scope=compile
-                			commons-cli;scope=compile,
-                			xerces;scope=compile,
-                			xerces-impl;scope=compile,
-                			xml-resolver;scope=compile,
-                			xml-commons-resolver;scope=compile,
-                			xmlParserAPIs;scope=compile
- 						   
- 						    -->
+                			xml-commons-resolver;scope=compile,                			xml-resolver;scope=compile,
+                			slf4j-api;scope=compile,
+							slf4j-log4j12;scope=compile            			 	
             			</Embed-Dependency>
 
             			<Embed-Transitive>true</Embed-Transitive>
@@ -193,12 +181,14 @@
 	  </properties>
 	  
     <dependencies>
+    <!-- 
         <dependency>
             <groupId>uk.ac.ebi</groupId>
             <artifactId>jutils</artifactId>
             <version>1.4</version>
+            <scope>test</scope>
         </dependency>
-
+ -->
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.osgi.core</artifactId>
@@ -224,6 +214,19 @@
 		  <groupId>net.toxbank</groupId>
 		  <artifactId>toxbank-client-java</artifactId>
 		  <version>0.0.1-SNAPSHOT</version>
+		 <exclusions>
+	        <exclusion> 
+	          <groupId>org.slf4j</groupId>
+	          <artifactId>slf4j-log4j12</artifactId>
+	       	</exclusion>
+      		</exclusions> 		  
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.slf4j</groupId>
+		  <artifactId>slf4j-log4j12</artifactId>
+		  <version>1.6.1</version>
+	  
 		</dependency>
     </dependencies>
 
