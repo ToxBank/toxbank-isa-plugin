@@ -121,6 +121,8 @@
                         <Export-Package>net.toxbank.isa.creator.plugin</Export-Package>
                         <Bundle-Activator>net.toxbank.isa.creator.plugin.Activator</Bundle-Activator>
                         <Embed-Dependency>
+                        	*;scope=compile|runtime
+                        	<!-- 
                 			toxbank-client-java;scope=compile,                           
                 			httpclient;scope=compile,
                 			httpcore;scope=compile,
@@ -143,7 +145,8 @@
                 			xerces;scope=compile,
                 			xml-commons-resolver;scope=compile,                			xml-resolver;scope=compile,
                 			slf4j-api;scope=compile,
-							slf4j-log4j12;scope=compile            			 	
+							slf4j-log4j12;scope=compile
+							 -->            			 	
             			</Embed-Dependency>
 
             			<Embed-Transitive>true</Embed-Transitive>
@@ -219,14 +222,25 @@
 	          <groupId>org.slf4j</groupId>
 	          <artifactId>slf4j-log4j12</artifactId>
 	       	</exclusion>
+	        <exclusion> 
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+	       	</exclusion>	       	
       		</exclusions> 		  
 		</dependency>
 		
 		<dependency>
 		  <groupId>org.slf4j</groupId>
 		  <artifactId>slf4j-log4j12</artifactId>
-		  <version>1.6.1</version>
+		  <version>1.5.6</version>
 	  
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.0.3</version>
+			<type>jar</type>
+			<scope>provided</scope>
 		</dependency>
     </dependencies>
 
