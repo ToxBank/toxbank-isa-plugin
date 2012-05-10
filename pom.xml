@@ -6,7 +6,7 @@
 
     <groupId>net.toxbank</groupId>
     <artifactId>toxbank-isa-plugin</artifactId>
-    <version>0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>Plugin to search the Toxbank REST services within ISAcreator.</name>
     <packaging>bundle</packaging>
 
@@ -88,6 +88,10 @@
     </repository>
     </repositories>
 
+    <organization>
+    	<name>Toxbank</name>
+    	<url>http://toxbank.net</url>
+    </organization>
     <build>
         <plugins>
 
@@ -207,7 +211,7 @@
 		<dependency>
 		  <groupId>org.slf4j</groupId>
 		  <artifactId>slf4j-log4j12</artifactId>
-		  <version>1.5.6</version>
+		  <version>1.6.1</version>
 	  
 		</dependency>
 		<dependency>
