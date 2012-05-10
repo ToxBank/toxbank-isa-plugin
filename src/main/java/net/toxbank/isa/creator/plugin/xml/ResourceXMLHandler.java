@@ -18,8 +18,12 @@ public class ResourceXMLHandler {
             String name = (String) reader.read("/resource/name", XPathConstants.STRING);
             String abbreviation = (String) reader.read("/resource/abbreviation", XPathConstants.STRING);
             String queryURL = (String) reader.read("/resource/queryURL", XPathConstants.STRING);
-
-            return new ResourceDescription(name, abbreviation, queryURL);
+            String username = (String) reader.read("/resource/username", XPathConstants.STRING);
+            String password = (String) reader.read("/resource/password", XPathConstants.STRING);
+            ResourceDescription resourceDescription = new ResourceDescription(name, abbreviation, queryURL);
+            resourceDescription.setUsername(username);
+            resourceDescription.setPassword(password);
+            return resourceDescription;
 
         } catch (FileNotFoundException e) {
             return new ResourceDescription("Repository", "REPO", "URL is unknown");

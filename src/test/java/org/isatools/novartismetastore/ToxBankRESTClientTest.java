@@ -29,7 +29,17 @@ public class ToxBankRESTClientTest {
             System.out.println("For " + source.getSourceName());
 
             for(OntologyTerm term : result.get(source)) {
-                System.out.println("\t" + term.getUniqueId() + " term name is: " + term.getOntologyTermName());
+                System.out.println(
+                		String.format("getUniqueId=%s\ngetOntologyTermName=%s\ngetComments=%s\ngetOntologyPurl=%s\ngetOntologySource=%s\ngetOntologySourceAccession=%s\ngetOntologyVersionId=%s\ngetOntologySourceInformation=%s",
+                		term.getUniqueId(),
+                		term.getOntologyTermName(),
+                		term.getComments(),
+                		term.getOntologyPurl(),
+                		term.getOntologySource(),
+                		term.getOntologySourceAccession(),
+                		term.getOntologyVersionId(),
+                		term.getOntologySourceInformation()
+                		));
             }
         }
     }
