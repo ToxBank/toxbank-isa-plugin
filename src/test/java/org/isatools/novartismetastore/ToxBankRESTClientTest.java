@@ -22,7 +22,7 @@ public class ToxBankRESTClientTest {
     @Test
     public void getTermsByPartialNameFromSource() {
         ToxBankRESTClient client = new ToxBankRESTClient();
-        Map<OntologySourceRefObject, List<OntologyTerm>> result = client.searchRepository("Nina");
+        Map<OntologySourceRefObject, List<OntologyTerm>> result = client.searchRepository("Biomaterials");
 
         System.out.println("There are " + result.size() + " results");
         for (OntologySourceRefObject source : result.keySet()) {
@@ -30,7 +30,7 @@ public class ToxBankRESTClientTest {
 
             for(OntologyTerm term : result.get(source)) {
                 System.out.println(
-                		String.format("getUniqueId=%s\ngetOntologyTermName=%s\ngetComments=%s\ngetOntologyPurl=%s\ngetOntologySource=%s\ngetOntologySourceAccession=%s\ngetOntologyVersionId=%s\ngetOntologySourceInformation=%s",
+                		String.format("getUniqueId=%s\ngetOntologyTermName=%s\ngetComments=%s\ngetOntologyPurl=%s\ngetOntologySource=%s\ngetOntologySourceAccession=%s\ngetOntologyVersionId=%s\ngetOntologySourceInformation=%s\n\n",
                 		term.getUniqueId(),
                 		term.getOntologyTermName(),
                 		term.getComments(),

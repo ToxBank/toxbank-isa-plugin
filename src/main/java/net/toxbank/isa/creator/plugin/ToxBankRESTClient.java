@@ -1,5 +1,6 @@
 package net.toxbank.isa.creator.plugin;
 
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import net.toxbank.client.resource.Project;
 import net.toxbank.client.resource.Protocol;
 import net.toxbank.client.resource.User;
 import net.toxbank.isa.creator.plugin.resource.ResourceDescription;
+import net.toxbank.isa.creator.plugin.xml.KeywordsXMLHandler;
 import net.toxbank.isa.creator.plugin.xml.ResourceXMLHandler;
 
 import org.isatools.isacreator.ontologymanager.OntologySourceRefObject;
@@ -75,6 +77,9 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
     	    	convertResourceResult(organisations,source,results);
     		}
     		
+    		List<OntologyTerm> terms = searchKeywords(term);
+    		if ((terms!=null) && terms.size()>0)  results.put(KeywordsXMLHandler.source,terms);
+    		
             return results;
         } catch (MalformedURLException e) {
             System.out.println("Wrong URL ...");
@@ -86,6 +91,19 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
         	try { tbclient.logout(); } catch (Exception x) {}
         }
         return new HashMap<OntologySourceRefObject, List<OntologyTerm>>();
+    }
+    
+    protected List<OntologyTerm> searchKeywords(String term)  {
+    	KeywordsXMLHandler xmlHandler = new KeywordsXMLHandler();
+
+        try {
+            return xmlHandler.parseXML(resourceInformation.getKeywords().getFile(),term);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("No file found. Assuming connection is down...");
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void registerSearch() {

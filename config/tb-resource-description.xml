@@ -1,7 +1,8 @@
 <resource>
-    <name>ToxBank Users</name>
-    <abbreviation>TBU</abbreviation>
+    <name>ToxBank</name>
+    <abbreviation>TB</abbreviation>
     <queryURL>http://toxbanktest1.opentox.org:8080/toxbank</queryURL>
     <username>guest</username>
     <password>guest</password>
+    <keywords>file:///c:/myfiles/keyword_hierarchy.xml</keywords>
 </resource>

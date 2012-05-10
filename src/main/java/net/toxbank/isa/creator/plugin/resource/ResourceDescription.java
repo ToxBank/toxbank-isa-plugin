@@ -1,12 +1,24 @@
 package net.toxbank.isa.creator.plugin.resource;
 
+import java.net.URL;
+
 public class ResourceDescription {
 
     private String resourceName;
     private String resourceAbbreviation;
     private String queryURL;
     private String username;
-    public String getUsername() {
+    private URL keywords;
+    
+    public URL getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(URL keywords) {
+		this.keywords = keywords;
+	}
+
+	public String getUsername() {
 		return username;
 	}
 
