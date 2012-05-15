@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import net.toxbank.client.Resources;
 import net.toxbank.client.TBClient;
 import net.toxbank.client.resource.IToxBankResource;
 import net.toxbank.client.resource.Organisation;
@@ -19,6 +19,9 @@ import net.toxbank.isa.creator.plugin.resource.ResourceDescription;
 import net.toxbank.isa.creator.plugin.xml.KeywordsXMLHandler;
 import net.toxbank.isa.creator.plugin.xml.ResourceXMLHandler;
 
+import org.isatools.isacreator.configuration.Ontology;
+import org.isatools.isacreator.configuration.RecommendedOntology;
+import org.isatools.isacreator.gui.ApplicationManager;
 import org.isatools.isacreator.ontologymanager.OntologySourceRefObject;
 import org.isatools.isacreator.ontologymanager.common.OntologyTerm;
 import org.isatools.isacreator.plugins.host.service.PluginOntologyCVSearch;
@@ -39,46 +42,73 @@ import org.isatools.isacreator.plugins.registries.OntologySearchPluginRegistry;
  *         Time: 16:51
  */
 public class ToxBankRESTClient implements PluginOntologyCVSearch {
-
-    public static ResourceDescription resourceInformation;
+	
+	public static List<ResourceDescription> resourceInformation;
     public static String queryURL;
-
+    
     static {
         ResourceXMLHandler xmlHandler = new ResourceXMLHandler();
         resourceInformation = xmlHandler.parseXML();
-        queryURL = resourceInformation.getQueryURL();
     }
 
-
     public Map<OntologySourceRefObject, List<OntologyTerm>> searchRepository(String term) {
-    	TBClient tbclient = new TBClient();
+        return searchRepository(term, new HashMap<String, RecommendedOntology>(), false);
+
+    }
+    
+    enum TBRESOURCE {
+    	TBU,
+    	TBP,
+    	TBC,
+    	TBO,
+    	TBK
+    }
+    
+    private Map<OntologySourceRefObject, List<OntologyTerm>> performQuery(
+    							Map<OntologySourceRefObject, List<OntologyTerm>> results,
+    							TBClient tbclient,
+    							String term, ResourceDescription resourceDescription) {
+
         try {
-    		boolean ok = tbclient.login(resourceInformation.getUsername(),resourceInformation.getPassword());
-    		List<User> users = tbclient.getUserClient().searchRDF_XML(new URL(String.format("%s%s", queryURL,Resources.user)),term);
-    		List<Protocol> protocols = tbclient.getProtocolClient().searchRDF_XML(new URL(String.format("%s%s", queryURL,Resources.protocol)),term);
-    		List<Project> projects = tbclient.getProjectClient().searchRDF_XML(new URL(String.format("%s%s", queryURL,Resources.project)),term);
-    		List<Organisation> organisations = tbclient.getOrganisationClient().searchRDF_XML(new URL(String.format("%s%s", queryURL,Resources.organisation)),term);
-    		
-    		Map<OntologySourceRefObject, List<OntologyTerm>> results = new HashMap<OntologySourceRefObject, List<OntologyTerm>>();
-    		if (users!=null && users.size()>0) {
-    			OntologySourceRefObject source = new OntologySourceRefObject("TBU",  String.format("%s%s", queryURL,Resources.user), "", "Toxbank users");
-    			convertResourceResult(users,source,results);
-    		}
-    		if (protocols!=null && protocols.size()>0) {
-    	    	OntologySourceRefObject source = new OntologySourceRefObject("TBP",  String.format("%s%s", queryURL,Resources.protocol), "", "Toxbank protocols");
-    	    	convertResourceResult(protocols,source,results);
-    		}
-    		if (projects!=null && projects.size()>0) {
-    	    	OntologySourceRefObject source = new OntologySourceRefObject("TBC",  String.format("%s%s", queryURL,Resources.project), "", "Toxbank projects");
-    	    	convertResourceResult(projects,source,results);
-    		}
-    		if (organisations!=null && organisations.size()>0) {
-    	    	OntologySourceRefObject source = new OntologySourceRefObject("TBO", String.format("%s%s", queryURL,Resources.organisation), "", "Toxbank organisations");
-    	    	convertResourceResult(organisations,source,results);
-    		}
-    		
-    		List<OntologyTerm> terms = searchKeywords(term);
-    		if ((terms!=null) && terms.size()>0)  results.put(KeywordsXMLHandler.source,terms);
+        	TBRESOURCE tbresource = TBRESOURCE.valueOf(resourceDescription.getResourceAbbreviation());
+			OntologySourceRefObject source = new OntologySourceRefObject(
+										resourceDescription.getResourceAbbreviation(),  
+										resourceDescription.getQueryURL(),
+										"",
+										resourceDescription.getResourceName());
+        	switch (tbresource) {
+        	case TBU: {
+        		List<User> items = tbclient.getUserClient().searchRDF_XML(new URL(resourceDescription.getQueryURL()),term);
+        		if (items!=null && items.size()>0) 
+        			convertResourceResult(items,source,results);
+        		
+        		break;
+        	}
+        	case TBC: {
+        		List<Project> items = tbclient.getProjectClient().searchRDF_XML(new URL(resourceDescription.getQueryURL()),term);
+        		if (items!=null && items.size()>0) 
+        			convertResourceResult(items,source,results);
+        		break;
+        	}
+        	case TBP: {
+        		List<Protocol> items = tbclient.getProtocolClient().searchRDF_XML(new URL(resourceDescription.getQueryURL()),term);
+        		if (items!=null && items.size()>0) 
+        			convertResourceResult(items,source,results);
+        		break;
+        	}
+        	case TBO: {
+        		List<Organisation> items = tbclient.getOrganisationClient().searchRDF_XML(new URL(resourceDescription.getQueryURL()),term);
+        		if (items!=null && items.size()>0) 
+        			convertResourceResult(items,source,results);
+        		break;
+        	}
+        	case TBK: {
+        		List<OntologyTerm> terms = searchKeywords(term,resourceDescription);
+        		if ((terms!=null) && terms.size()>0)  results.put(KeywordsXMLHandler.source,terms);
+        		break;
+        	}
+        	}
+
     		
             return results;
         } catch (MalformedURLException e) {
@@ -88,17 +118,103 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
             System.out.println("No file found. Assuming connection is down...");
             e.printStackTrace();
         } finally {
-        	try { tbclient.logout(); } catch (Exception x) {}
         }
         return new HashMap<OntologySourceRefObject, List<OntologyTerm>>();
     }
     
-    protected List<OntologyTerm> searchKeywords(String term)  {
+    public Map<OntologySourceRefObject, List<OntologyTerm>> searchRepository(String term, 
+    			Map<String, RecommendedOntology> recommendedOntologies, boolean searchAll) {
+		 Map<OntologySourceRefObject, List<OntologyTerm>> results = new HashMap<OntologySourceRefObject, List<OntologyTerm>>();
+		 System.out.println(recommendedOntologies);
+    	TBClient tbclient = new TBClient();
+    	 try {
+    		 boolean loggedin = false;
+		        for (ResourceDescription resourceDescription : resourceInformation) {
+
+		        	if (!loggedin) {
+		        		loggedin = tbclient.login(resourceDescription.getUsername(),resourceDescription.getPassword());
+		        	}
+		            String fieldDetails = ApplicationManager.getCurrentlySelectedFieldName();
+		            // only do the search if the field matches one expected by the system
+		            if (searchAll) {
+		                results.putAll(performQuery(results,tbclient,term, resourceDescription));
+		            } else {
+		                if (checkIfResourceHasField(resourceDescription, fieldDetails) || checkIfResourceIsRecommended(resourceDescription, recommendedOntologies)) {
+		                    System.out.println("Querying on " + resourceDescription.getResourceName() + " for " + term + " on " + fieldDetails);
+		                    results.putAll(performQuery(results,tbclient, term, resourceDescription));
+		                }
+		            }
+		        }
+		     
+         } catch (MalformedURLException e) {
+             System.out.println("Wrong URL ...");
+             e.printStackTrace();
+         } catch (Exception e) {
+             System.out.println("No file found. Assuming connection is down...");
+             e.printStackTrace();
+         } finally {
+        		try { tbclient.logout(); } catch (Exception x) {}
+         }	        
+
+         return results;
+    }
+    
+    /**
+     * We can check against current assay and the field
+     *
+     * @param resourceDescription - resource to check
+     * @param fieldDetails        - field to look for
+     * @return true or false. True if the resource should be searched on for this field.
+     */
+    public boolean checkIfResourceHasField(ResourceDescription resourceDescription, String fieldDetails) {
+    	return false;
+    	/*
+        if (fieldDetails == null) {
+            return false;
+        } else {
+            String fieldName = fieldDetails.substring(fieldDetails.lastIndexOf(":>") + 2).trim();
+
+            if (resourceDescription.getResourceFields().containsKey(fieldName)) {
+                String assayMeasurement, assayTechnology = "";
+                if (fieldDetails.contains("using")) {
+                    String[] fields = fieldDetails.split("using");
+                    assayMeasurement = fields[0].trim();
+                    assayTechnology = fields[1].substring(0, fields[1].lastIndexOf(":>")).trim();
+                } else {
+                    assayMeasurement = fieldDetails.substring(0, fieldDetails.lastIndexOf(":>"));
+                }
+
+                for (ResourceField resourceField : resourceDescription.getResourceFields().get(fieldName)) {
+                    if (resourceField.getAssayMeasurement().isEmpty()) {
+                        return true;
+                    } else if (assayMeasurement.equalsIgnoreCase(resourceField.getAssayMeasurement())
+                            && assayTechnology.equalsIgnoreCase(resourceField.getAssayTechnology())) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        */
+    }
+
+    
+    private boolean checkIfResourceIsRecommended(ResourceDescription resourceDescription, Map<String, RecommendedOntology> recommendedOntologies) {
+        for (String ontology : recommendedOntologies.keySet()) {
+            if (recommendedOntologies.get(ontology).getOntology().getOntologyAbbreviation().equals(resourceDescription.getResourceAbbreviation())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    protected List<OntologyTerm> searchKeywords(String term, ResourceDescription resourceDescription)  {
     	KeywordsXMLHandler xmlHandler = new KeywordsXMLHandler();
 
         try {
-            return xmlHandler.parseXML(resourceInformation.getKeywords().getFile(),term);
-
+            return xmlHandler.parseXML(new URL(resourceDescription.getQueryURL()).getFile(),term);
+        } catch (MalformedURLException e) {
+        	System.out.println("Invalid file path "+resourceDescription.getQueryURL());
+        	 return null;
         } catch (FileNotFoundException e) {
             System.out.println("No file found. Assuming connection is down...");
             e.printStackTrace();
@@ -144,4 +260,15 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
          }
     	 if (terms!=null && (terms.size()>0)) results.put(source, terms);
     }
+
+	public Set<String> getAvailableResourceAbbreviations() {
+		return null;
+	}
+
+	public boolean hasPreferredResourceForCurrentField(
+			Map<String, RecommendedOntology> arg0) {
+		System.out.println("hasPreferredResourceForCurrentField");
+		System.out.println(arg0);
+		return false;
+	}
 }

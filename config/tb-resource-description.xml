@@ -1,8 +1,37 @@
-<resource>
-    <name>ToxBank</name>
-    <abbreviation>TB</abbreviation>
-    <queryURL>http://toxbanktest1.opentox.org:8080/toxbank</queryURL>
-    <username>guest</username>
-    <password>guest</password>
-    <keywords>file:///c:/myfiles/keyword_hierarchy.xml</keywords>
-</resource>
+<resources>
+
+	    <username>guest</username>
+	    <password>guest</password>
+	    
+    <resource name="Toxbank Users" abbreviation="TBU" 
+    	queryURL="http://toxbanktest1.opentox.org:8080/toxbank/user" version="0.1">
+        <fields>
+            <field name="Label"/>
+             <field name="Characteristics[organism]"/>
+             <field name="Label" assay-measurement="metabolite profiling" assay-technology="NMR spectroscopy"/>
+        </fields>
+    </resource>
+    
+    <resource name="Toxbank Protocols" abbreviation="TBP" 
+    	queryURL="http://toxbanktest1.opentox.org:8080/toxbank/protocol" version="0.1">
+        <fields>
+            <field name="Label"/>
+        </fields>
+    </resource>
+    
+    <resource name="Toxbank Users" abbreviation="TBU" 
+    	queryURL="http://toxbanktest1.opentox.org:8080/toxbank/user" version="0.1">
+        <fields>
+            <field name="Label"/>
+        </fields>
+    </resource>        
+
+    <resource name="Toxbank Keywords" abbreviation="TBK" 
+    			queryURL="file:///D:/src-pol/toxbank-isa-plugin/config/keyword_hierarchy.xml" version="0.1">
+        <fields>
+            <field name="Label"/>
+        </fields>
+    </resource>   
+    
+
+</resources>

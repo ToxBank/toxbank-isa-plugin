@@ -49,7 +49,7 @@ public class KeywordsXMLHandler {
             		}
             	}
             	if (uniqueName==null) continue;
-            	else uniqueName = uniqueName.toLowerCase(); 
+            	term = term.toLowerCase(); 
             		
             	String id = String.format("%s",((Element) node).getAttribute("number").trim());
             	String token = ((Element) node).getAttribute("title").trim();
