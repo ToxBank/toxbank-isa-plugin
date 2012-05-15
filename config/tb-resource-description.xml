@@ -19,12 +19,19 @@
         </fields>
     </resource>
     
-    <resource name="Toxbank Users" abbreviation="TBU" 
-    	queryURL="http://toxbanktest1.opentox.org:8080/toxbank/user" version="0.1">
+    <resource name="Toxbank Organisations" abbreviation="TBO" 
+    	queryURL="http://toxbanktest1.opentox.org:8080/toxbank/organisation" version="0.1">
         <fields>
             <field name="Label"/>
         </fields>
     </resource>        
+    
+    <resource name="Toxbank Consortiums" abbreviation="TBC" 
+    	queryURL="http://toxbanktest1.opentox.org:8080/toxbank/project" version="0.1">
+        <fields>
+            <field name="Label"/>
+        </fields>
+    </resource>       
 
     <resource name="Toxbank Keywords" abbreviation="TBK" 
     			queryURL="file:///D:/src-pol/toxbank-isa-plugin/config/keyword_hierarchy.xml" version="0.1">

@@ -22,7 +22,7 @@ public class ToxBankRESTClientTest {
     @Test
     public void getTermsByPartialNameFromSource() {
         ToxBankRESTClient client = new ToxBankRESTClient();
-        Map<OntologySourceRefObject, List<OntologyTerm>> result = client.searchRepository("Cell");
+        Map<OntologySourceRefObject, List<OntologyTerm>> result = client.searchRepository("Cell",null,true);
 
         System.out.println("There are " + result.size() + " results");
         for (OntologySourceRefObject source : result.keySet()) {
@@ -40,6 +40,7 @@ public class ToxBankRESTClientTest {
                 		term.getOntologyVersionId(),
                 		term.getOntologySourceInformation()
                 		));
+                System.out.println(term.getComments());
             }
         }
     }

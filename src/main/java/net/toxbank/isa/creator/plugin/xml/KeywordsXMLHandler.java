@@ -52,11 +52,13 @@ public class KeywordsXMLHandler {
             	term = term.toLowerCase(); 
             		
             	String id = String.format("%s",((Element) node).getAttribute("number").trim());
-            	String token = ((Element) node).getAttribute("title").trim();
-                if (!id.equalsIgnoreCase("") && token.toLowerCase().indexOf(term)>=0) {
+            	String title = ((Element) node).getAttribute("title").trim();
+                if (!id.equalsIgnoreCase("") && title.toLowerCase().indexOf(term)>=0) {
                 	OntologyTerm oterm = new OntologyTerm(null,null,source);
                 	oterm.setOntologyTermName(uniqueName);
-                	oterm.setOntologySourceAccession(token);
+                	oterm.setOntologySourceAccession(title);
+                	oterm.addToComments("Identifier", id);
+                	oterm.addToComments("Title", title);
                     terms.add(oterm);
                 }
             }
