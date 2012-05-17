@@ -1,5 +1,6 @@
 package net.toxbank.isa.creator.plugin;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -209,16 +210,27 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
     }
     protected List<OntologyTerm> searchKeywords(String term, ResourceDescription resourceDescription)  {
     	KeywordsXMLHandler xmlHandler = new KeywordsXMLHandler();
-
+    	String keywordsPath ;
         try {
-            return xmlHandler.parseXML(new URL(resourceDescription.getQueryURL()).getFile(),term);
+        	URL url = new URL(resourceDescription.getQueryURL());
+        	File file = new File(url.getFile());
+        	if (!file.exists()) throw new FileNotFoundException(file.getAbsolutePath());
+        	keywordsPath = file.getAbsolutePath();
         } catch (MalformedURLException e) {
-        	System.out.println("Invalid file path "+resourceDescription.getQueryURL());
-        	 return null;
+        	//consider relative path within ISACreator
+        	keywordsPath = resourceDescription.getQueryURL();
         } catch (FileNotFoundException e) {
             System.out.println("No file found. Assuming connection is down...");
             e.printStackTrace();
             return null;
+        }
+        
+        try {
+        	  return xmlHandler.parseXML(keywordsPath,term);
+        } catch (Exception x) {
+        	x.printStackTrace();
+        	System.out.println("Invalid file path "+resourceDescription.getQueryURL());
+        	return null;
         }
     }
 
