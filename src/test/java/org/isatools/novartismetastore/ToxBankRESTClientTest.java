@@ -40,7 +40,7 @@ public class ToxBankRESTClientTest {
                 		term.getOntologyVersionId(),
                 		term.getOntologySourceInformation()
                 		));
-                System.out.println(term.getComments());
+                System.out.println(term.getComments()==null?"":term.getComments());
             }
         }
     }

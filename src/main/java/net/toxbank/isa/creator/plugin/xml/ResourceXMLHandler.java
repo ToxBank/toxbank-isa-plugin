@@ -17,8 +17,8 @@ import org.w3c.dom.NodeList;
 import uk.ac.ebi.utils.xml.XPathReader;
 
 public class ResourceXMLHandler {
-
-    public static final String resourceFileLocation = "config/tb-resource-description.xml";
+	public static final String pluginLocation = "Plugins/ToxbankRESTPlugin";
+    public static final String resourceFileLocation = String.format("%s/config/resource-description.xml",pluginLocation);
 
     public List<ResourceDescription> parseXML() {
         try {

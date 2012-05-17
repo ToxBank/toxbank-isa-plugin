@@ -27,6 +27,7 @@ import org.isatools.isacreator.ontologymanager.OntologySourceRefObject;
 import org.isatools.isacreator.ontologymanager.common.OntologyTerm;
 import org.isatools.isacreator.plugins.host.service.PluginOntologyCVSearch;
 import org.isatools.isacreator.plugins.registries.OntologySearchPluginRegistry;
+import org.opentox.rest.RestException;
 
 /**
  * Created by the Toxbank
@@ -112,6 +113,9 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
 
     		
             return results;
+        } catch (RestException x) {
+            System.out.println(String.format("[%s] %s Error connecting to %s",x.getStatus(),x.getMessage(), resourceDescription.getQueryURL()));
+            x.printStackTrace();
         } catch (MalformedURLException e) {
             System.out.println("Wrong URL ...");
             e.printStackTrace();

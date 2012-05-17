@@ -34,7 +34,7 @@
     </resource>       
 
     <resource name="Toxbank Keywords" abbreviation="TBK" 
-    			queryURL="config/keyword_hierarchy.xml" version="0.1">
+    			queryURL="Plugins/ToxbankRESTPlugin/config/keyword_hierarchy.xml" version="0.1">
         <fields>
             <field name="Label"/>
         </fields>
