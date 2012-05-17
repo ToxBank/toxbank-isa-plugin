@@ -12,7 +12,7 @@ Requirements:
 
 	* The default ISACreator behaviour is to hide the investigation page, when only a single study is present. Since ToxBank custom fields are in the investigation page, the customized ToxBank ISACreator is compiled with an option to always show the investigation page in src/man/resources/defaultsettings.properties
 
-    alwaysShowInvestigation=true
+     mvn clean assembly:assembly -P toxbank
 
 	* ToxBank custom investigation.xml
 
