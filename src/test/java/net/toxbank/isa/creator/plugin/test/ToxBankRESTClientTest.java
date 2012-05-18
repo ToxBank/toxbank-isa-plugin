@@ -1,10 +1,13 @@
-package org.isatools.novartismetastore;
+package net.toxbank.isa.creator.plugin.test;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.toxbank.isa.creator.plugin.ToxBankRESTClient;
 
+import org.isatools.isacreator.configuration.Ontology;
+import org.isatools.isacreator.configuration.RecommendedOntology;
 import org.isatools.isacreator.ontologymanager.OntologySourceRefObject;
 import org.isatools.isacreator.ontologymanager.common.OntologyTerm;
 import org.junit.Test;
@@ -43,6 +46,37 @@ public class ToxBankRESTClientTest {
                 System.out.println(term.getComments()==null?"":term.getComments());
             }
         }
+    }
+    
+    @Test
+    public void getKeywords() {
+        ToxBankRESTClient client = new ToxBankRESTClient();
+        Map<String, RecommendedOntology> recommendedOntologies = new HashMap<String, RecommendedOntology>();
+        recommendedOntologies.put("TBK",new RecommendedOntology(new Ontology("TBK","0.1","TBK","TBK")));
+        Map<OntologySourceRefObject, List<OntologyTerm>> result = 
+        	
+        			client.searchRepository("cell",recommendedOntologies,false);
+
+
+        for (OntologySourceRefObject source : result.keySet()) {
+            System.out.println("For " + source.getSourceName());
+
+            for(OntologyTerm term : result.get(source)) {
+                System.out.println(
+                		String.format("getUniqueId=%s\ngetOntologyTermName=%s\ngetComments=%s\ngetOntologyPurl=%s\ngetOntologySource=%s\ngetOntologySourceAccession=%s\ngetOntologyVersionId=%s\ngetOntologySourceInformation=%s\n\n",
+                		term.getUniqueId(),
+                		term.getOntologyTermName(),
+                		term.getComments(),
+                		term.getOntologyPurl(),
+                		term.getOntologySource(),
+                		term.getOntologySourceAccession(),
+                		term.getOntologyVersionId(),
+                		term.getOntologySourceInformation()
+                		));
+                System.out.println(term.getComments()==null?"":term.getComments());
+            }
+        }
+        System.out.println("There are " + result.size() + " results");
     }
 
 }

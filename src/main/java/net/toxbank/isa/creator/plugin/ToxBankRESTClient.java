@@ -18,7 +18,7 @@ import net.toxbank.client.resource.Project;
 import net.toxbank.client.resource.Protocol;
 import net.toxbank.client.resource.User;
 import net.toxbank.isa.creator.plugin.resource.ResourceDescription;
-import net.toxbank.isa.creator.plugin.xml.KeywordsXMLHandler;
+import net.toxbank.isa.creator.plugin.xml.KeywordsRDFHandler;
 import net.toxbank.isa.creator.plugin.xml.ResourceXMLHandler;
 
 import org.isatools.isacreator.configuration.RecommendedOntology;
@@ -106,7 +106,7 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
         	}
         	case TBK: {
         		List<OntologyTerm> terms = searchKeywords(term,resourceDescription);
-        		if ((terms!=null) && terms.size()>0)  results.put(KeywordsXMLHandler.source,terms);
+        		if ((terms!=null) && terms.size()>0)  results.put(KeywordsRDFHandler.source,terms);
         		break;
         	}
         	}
@@ -213,7 +213,7 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
         return false;
     }
     protected List<OntologyTerm> searchKeywords(String term, ResourceDescription resourceDescription)  {
-    	KeywordsXMLHandler xmlHandler = new KeywordsXMLHandler();
+    	KeywordsRDFHandler keywordsHandler = new KeywordsRDFHandler();
     	String keywordsPath ;
         try {
         	URL url = new URL(resourceDescription.getQueryURL());
@@ -230,7 +230,7 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
         }
         
         try {
-        	  return xmlHandler.parseXML(keywordsPath,term);
+        	  return keywordsHandler.parse(keywordsPath,term);
         } catch (Exception x) {
         	x.printStackTrace();
         	System.out.println("Invalid file path "+resourceDescription.getQueryURL());
@@ -276,7 +276,11 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
             		 for (Project project : user.getProjects()) { b.append(d);b.append(project.getTitle());d=","; } 
             		 ontologyTerm.addToComments("Consortium",b.toString());
             	 }
-            	 if (user.getHomepage()!=null) ontologyTerm.addToComments("WWW",user.getHomepage().toExternalForm());
+            	 if (user.getHomepage()!=null) {
+            		 String url = user.getHomepage().toExternalForm();
+            		 if (url.startsWith("http")) url = String.format("<a href='%s'>%s</a>", url,url);
+            		 ontologyTerm.addToComments("WWW",user.getHomepage().toExternalForm());
+            	 }
             	 if (user.getEmail()!=null) ontologyTerm.addToComments("e-mail",user.getEmail());
             	 if (user.getWeblog()!=null) ontologyTerm.addToComments("Blog",user.getWeblog().toExternalForm());
              } else if (resource instanceof Protocol) {
