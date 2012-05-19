@@ -55,13 +55,20 @@ public class ToxBankRESTClientTest {
         recommendedOntologies.put("TBK",new RecommendedOntology(new Ontology("TBK","0.1","TBK","TBK")));
         Map<OntologySourceRefObject, List<OntologyTerm>> result = 
         	
-        			client.searchRepository("cell",recommendedOntologies,false);
+        			client.searchRepository("staining",recommendedOntologies,false);
 
 
         for (OntologySourceRefObject source : result.keySet()) {
             System.out.println("For " + source.getSourceName());
 
             for(OntologyTerm term : result.get(source)) {
+            	 System.out.println(String.format("%s\tLabel=%s\t(%s)\t%s",
+            			 term.getUniqueId(),
+            			 term.getOntologySourceAccession(),
+            			 term.getComments().get("Alias"),
+            			 term.getComments().get("Definition")
+            			 ));
+            	/*
                 System.out.println(
                 		String.format("getUniqueId=%s\ngetOntologyTermName=%s\ngetComments=%s\ngetOntologyPurl=%s\ngetOntologySource=%s\ngetOntologySourceAccession=%s\ngetOntologyVersionId=%s\ngetOntologySourceInformation=%s\n\n",
                 		term.getUniqueId(),
@@ -74,6 +81,7 @@ public class ToxBankRESTClientTest {
                 		term.getOntologySourceInformation()
                 		));
                 System.out.println(term.getComments()==null?"":term.getComments());
+                */
             }
         }
         System.out.println("There are " + result.size() + " results");

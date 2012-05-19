@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,8 @@ import org.isatools.isacreator.ontologymanager.common.OntologyTerm;
 import org.isatools.isacreator.plugins.host.service.PluginOntologyCVSearch;
 import org.isatools.isacreator.plugins.registries.OntologySearchPluginRegistry;
 import org.opentox.rest.RestException;
+
+
 
 /**
  * Created by the Toxbank
@@ -305,8 +309,19 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
             	 ontologyTerm.addToComments("Organisation name",resource.getTitle());
              }
              terms.add(ontologyTerm);
+             
          }
-    	 if (terms!=null && (terms.size()>0)) results.put(source, terms);
+    	 if (terms!=null && (terms.size()>0)) {
+    		 /**
+    		  * The results don't get sorted in the plugin panel, so not much sense here
+    		 Collections.sort(terms,new Comparator<OntologyTerm>() {
+				public int compare(OntologyTerm o1, OntologyTerm o2) {
+					return o1.getComments().get("category").compareTo(o2.getComments().get("category"));
+				}
+			});
+			**/
+    		 results.put(source, terms);
+    	 }
     }
 
 	public Set<String> getAvailableResourceAbbreviations() {
