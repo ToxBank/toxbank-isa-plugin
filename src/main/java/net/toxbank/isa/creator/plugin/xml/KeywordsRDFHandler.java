@@ -63,7 +63,7 @@ public class KeywordsRDFHandler {
 		//	"OPTIONAL { ?keyword skos:altLabel ?altLabel.}\n" +
 			"OPTIONAL { ?keyword rdfs:seeAlso ?seeAlso}.\n" +
 			"OPTIONAL { ?keyword owl:sameAs ?sameAs}.\n" +
-			"FILTER regex(?definition,\"%s\",\"i\")\n" +
+			"FILTER (regex(?prefLabel,\"%s\",\"i\") || regex(?definition,\"%s\",\"i\") )\n" +
 		//	"FILTER regex(?prefLabel,\"%s\",\"i\")\n" +
 			"} order by ?prefLabel \n"
 			;
@@ -71,7 +71,7 @@ public class KeywordsRDFHandler {
 	protected List<OntologyTerm> query(Model model,String term) throws Exception {
 		List<OntologyTerm> terms = new ArrayList<OntologyTerm>();
 
-		Query query = QueryFactory.create(String.format(sparqlQuery,TOXBANK.URI,ISA.URI,term));
+		Query query = QueryFactory.create(String.format(sparqlQuery,TOXBANK.URI,ISA.URI,term,term));
 		QueryExecution qe = QueryExecutionFactory.create(query,model);
 		ResultSet rs = qe.execSelect();
 		int n = 0;
