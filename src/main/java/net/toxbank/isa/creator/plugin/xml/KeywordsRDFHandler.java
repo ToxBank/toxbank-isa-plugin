@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import net.toxbank.client.io.rdf.TOXBANK;
 
-import org.isa2rdf.model.ISA;
 import org.isatools.isacreator.ontologymanager.OntologySourceRefObject;
 import org.isatools.isacreator.ontologymanager.common.OntologyTerm;
 
@@ -82,12 +80,12 @@ public class KeywordsRDFHandler {
 			")\n" +
 			"} order by ?categoryLabel \n"
 			;
-	
+	public static final String ISA_URI ="http://onto.toxbank.net/isa/";
 	protected List<OntologyTerm> query(Model model,String term) throws Exception {
 		List<OntologyTerm> terms = new ArrayList<OntologyTerm>();
 
 		//term = term.toLowerCase();
-		Query query = QueryFactory.create(String.format(sparqlQuery,TOXBANK.URI,ISA.URI,term,term,term,term,term,term));
+		Query query = QueryFactory.create(String.format(sparqlQuery,TOXBANK.URI,ISA_URI,term,term,term,term,term,term));
 		QueryExecution qe = QueryExecutionFactory.create(query,model);
 		ResultSet rs = qe.execSelect();
 		int n = 0;
