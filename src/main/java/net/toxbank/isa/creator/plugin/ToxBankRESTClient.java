@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +12,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import net.toxbank.client.TBClient;
+import net.toxbank.client.io.rdf.TOXBANK;
 import net.toxbank.client.resource.IToxBankResource;
 import net.toxbank.client.resource.Organisation;
 import net.toxbank.client.resource.Project;
@@ -74,7 +73,7 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
     							Map<OntologySourceRefObject, List<OntologyTerm>> results,
     							TBClient tbclient,
     							String term, ResourceDescription resourceDescription) {
-
+    	final String prefix = "SEURAT-Protocol-";
         try {
         	TBRESOURCE tbresource = TBRESOURCE.valueOf(resourceDescription.getResourceAbbreviation());
 			OntologySourceRefObject source = new OntologySourceRefObject(
@@ -97,7 +96,12 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
         		break;
         	}
         	case TBP: {
-        		List<Protocol> items = tbclient.getProtocolClient().searchRDF_XML(new URL(resourceDescription.getQueryURL()),term);
+        		List<Protocol> items  = null;
+        		if (term.startsWith(prefix)) {
+        			items = tbclient.getProtocolClient().getRDF_XML(new URL(String.format("%s/%s",resourceDescription.getQueryURL(),term)));
+        		} else 
+        			items = tbclient.getProtocolClient().searchRDF_XML(new URL(resourceDescription.getQueryURL()),term);
+
         		if (items!=null && items.size()>0) 
         			convertResourceResult(items,source,results);
         		break;

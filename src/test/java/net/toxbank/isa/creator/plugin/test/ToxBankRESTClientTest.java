@@ -48,6 +48,32 @@ public class ToxBankRESTClientTest {
         }
     }
     
+    
+    @Test
+    public void getProtocol() {
+        ToxBankRESTClient client = new ToxBankRESTClient();
+        Map<OntologySourceRefObject, List<OntologyTerm>> result = client.searchRepository("SEURAT-Protocol-259-1",null,true);
+
+        System.out.println("There are " + result.size() + " results");
+        for (OntologySourceRefObject source : result.keySet()) {
+            System.out.println("For " + source.getSourceName());
+
+            for(OntologyTerm term : result.get(source)) {
+                System.out.println(
+                		String.format("getUniqueId=%s\ngetOntologyTermName=%s\ngetComments=%s\ngetOntologyPurl=%s\ngetOntologySource=%s\ngetOntologySourceAccession=%s\ngetOntologyVersionId=%s\ngetOntologySourceInformation=%s\n\n",
+                		term.getUniqueId(),
+                		term.getOntologyTermName(),
+                		term.getComments(),
+                		term.getOntologyPurl(),
+                		term.getOntologySource(),
+                		term.getOntologySourceAccession(),
+                		term.getOntologyVersionId(),
+                		term.getOntologySourceInformation()
+                		));
+                System.out.println(term.getComments()==null?"":term.getComments());
+            }
+        }
+    }
     @Test
     public void getKeywords() {
         ToxBankRESTClient client = new ToxBankRESTClient();
