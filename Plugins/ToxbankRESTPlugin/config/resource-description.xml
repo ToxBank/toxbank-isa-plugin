@@ -1,44 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-	    <username>guest</username>
-	    <password>guest</password>
-	    
-    <resource name="Toxbank Users" abbreviation="TBU" 
-    	queryURL="http://toxbanktest1.opentox.org:8080/toxbank/user" version="0.1">
-        <fields>
-            <field name="Label"/>
-             <field name="Characteristics[organism]"/>
-             <field name="Label" assay-measurement="metabolite profiling" assay-technology="NMR spectroscopy"/>
-        </fields>
-    </resource>
-    
-    <resource name="Toxbank Protocols" abbreviation="TBP" 
-    	queryURL="http://toxbanktest1.opentox.org:8080/toxbank/protocol" version="0.1">
-        <fields>
-            <field name="Label"/>
-        </fields>
-    </resource>
-    
-    <resource name="Toxbank Organisations" abbreviation="TBO" 
-    	queryURL="http://toxbanktest1.opentox.org:8080/toxbank/organisation" version="0.1">
-        <fields>
-            <field name="Label"/>
-        </fields>
-    </resource>        
-    
-    <resource name="Toxbank Consortiums" abbreviation="TBC" 
-    	queryURL="http://toxbanktest1.opentox.org:8080/toxbank/project" version="0.1">
-        <fields>
-            <field name="Label"/>
-        </fields>
-    </resource>       
-
-    <resource name="Toxbank Keywords" abbreviation="TBK" 
-    			queryURL="Plugins/ToxbankRESTPlugin/config/keyword_hierarchy.owl" version="0.1">
-        <fields>
-            <field name="Label"/>
-        </fields>
-    </resource>   
-    
-
+  <username>guest</username>
+  <password>guest</password>
+  <resource name="Toxbank Users" abbreviation="TBU" queryURL="http://toxbanktest1.opentox.org:8080/toxbank/user" version="0.1">
+    <fields>
+      <field name="Label" />
+      <field name="Characteristics[organism]" />
+      <field name="Label" assay-measurement="metabolite profiling" assay-technology="NMR spectroscopy" />
+    </fields>
+  </resource>
+  <resource name="Toxbank Protocols" abbreviation="TBP" queryURL="http://toxbanktest1.opentox.org:8080/toxbank/protocol" version="0.1">
+    <fields>
+      <field name="Label" />
+    </fields>
+  </resource>
+  <resource name="Toxbank Organisations" abbreviation="TBO" queryURL="http://toxbanktest1.opentox.org:8080/toxbank/organisation" version="0.1">
+    <fields>
+      <field name="Label" />
+    </fields>
+  </resource>
+  <resource name="Toxbank Consortiums" abbreviation="TBC" queryURL="http://toxbanktest1.opentox.org:8080/toxbank/project" version="0.1">
+    <fields>
+      <field name="Label" />
+    </fields>
+  </resource>
+  <resource name="Toxbank Keywords" abbreviation="TBK" queryURL="Plugins/ToxbankRESTPlugin/config/keyword_hierarchy.owl" version="0.1">
+    <fields>
+      <field name="Label" />
+    </fields>
+  </resource>
 </resources>
