@@ -26,7 +26,7 @@ public class ResourceXMLHandler {
             XPathReader reader = new XPathReader(new FileInputStream(resourceFileLocation));
             String username = (String) reader.read("/resources/username", XPathConstants.STRING);
             String password = (String) reader.read("/resources/password", XPathConstants.STRING);
-            //one could have different credentials for different reosurces, but for now use the same
+            //one could have different credentials for different resources, but for now use the same
             
             NodeList resources = (NodeList) reader.read("/resources/resource", XPathConstants.NODESET);
 
@@ -41,9 +41,11 @@ public class ResourceXMLHandler {
                     String abbreviation = (String) reader.read("resources/resource[" + resourceIndex + "]/@abbreviation", XPathConstants.STRING);
                     String resourceVersion = (String) reader.read("resources/resource[" + resourceIndex + "]/@version", XPathConstants.STRING);
                     String queryURL = (String) reader.read("resources/resource[" + resourceIndex + "]/@queryURL", XPathConstants.STRING);
+                    String searchServiceURL = (String) reader.read("resources/resource[" + resourceIndex + "]/@searchServiceURL", XPathConstants.STRING);
 
                     if (!name.isEmpty()) {
                         ResourceDescription newDescription = new ResourceDescription(name, abbreviation, resourceVersion, queryURL);
+                        newDescription.setSearchServiceURL("".equals(searchServiceURL)?null:searchServiceURL);
                         newDescription.setUsername(username);
                         newDescription.setPassword(password);
 

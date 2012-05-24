@@ -26,8 +26,17 @@ public class ResourceDescription {
     private String resourceAbbreviation;
     private String resourceVersion;
     private String queryURL;
+    private String searchServiceURL;
 
-    private MultiMap<String, ResourceField> resourceFields;
+    public String getSearchServiceURL() {
+		return searchServiceURL;
+	}
+
+	public void setSearchServiceURL(String searchServiceURL) {
+		this.searchServiceURL = searchServiceURL;
+	}
+
+	private MultiMap<String, ResourceField> resourceFields;
 
     public ResourceDescription(String resourceName, String resourceAbbreviation, String resourceVersion, String queryURL) {
         this(resourceName, resourceAbbreviation, resourceVersion, queryURL, new MultiHashMap<String, ResourceField>());

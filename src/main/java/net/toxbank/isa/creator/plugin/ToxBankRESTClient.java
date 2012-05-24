@@ -10,13 +10,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import net.toxbank.client.TBClient;
-import net.toxbank.client.io.rdf.TOXBANK;
 import net.toxbank.client.resource.IToxBankResource;
 import net.toxbank.client.resource.Organisation;
 import net.toxbank.client.resource.Project;
 import net.toxbank.client.resource.Protocol;
+import net.toxbank.client.resource.ProtocolClient;
 import net.toxbank.client.resource.User;
 import net.toxbank.isa.creator.plugin.resource.ResourceDescription;
 import net.toxbank.isa.creator.plugin.xml.KeywordsRDFHandler;
@@ -29,7 +31,6 @@ import org.isatools.isacreator.ontologymanager.common.OntologyTerm;
 import org.isatools.isacreator.plugins.host.service.PluginOntologyCVSearch;
 import org.isatools.isacreator.plugins.registries.OntologySearchPluginRegistry;
 import org.opentox.rest.RestException;
-
 
 
 /**
@@ -97,13 +98,38 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
         	}
         	case TBP: {
         		List<Protocol> items  = null;
-        		if (term.startsWith(prefix)) {
-        			items = tbclient.getProtocolClient().getRDF_XML(new URL(String.format("%s/%s",resourceDescription.getQueryURL(),term)));
-        		} else 
-        			items = tbclient.getProtocolClient().searchRDF_XML(new URL(resourceDescription.getQueryURL()),term);
-
+        		ProtocolClient pcli = tbclient.getProtocolClient();
+        		//if protocol identifier, go directly by the URL
+        		if (term.startsWith(prefix)) 
+        			items = pcli.getRDF_XML(new URL(String.format("%s/%s",resourceDescription.getQueryURL(),term)));
+        		//otherwise
+        		if (items==null || items.size()==0) {
+	        		if (resourceDescription.getSearchServiceURL()!=null) 
+	        		try {
+	        			//try the search service
+	        			List<URL> urls = tbclient.getSearchClient().searchURI(new URL(String.format("%ssearch",resourceDescription.getSearchServiceURL())),term);
+	        			if (urls!=null) {
+	        				items = new ArrayList<Protocol>();
+	        				for (URL url : urls) try {
+	        					Logger.getLogger(this.getClass().getName()).log(Level.FINE,url.toExternalForm());
+	        					items.addAll(pcli.get(url));
+	        				} catch (Exception x) {
+	        					//we can get the URL, but not have rights to retrieve the metadata
+	        					Logger.getLogger(this.getClass().getName()).log(Level.WARNING,url.toExternalForm(),x);
+	        					Protocol protocol = new Protocol(url);
+	        					items.add(protocol);
+	        				}
+	        			}
+	        			
+	        		} catch (Exception x) { Logger.getLogger(this.getClass().getName()).log(Level.WARNING,resourceDescription.getSearchServiceURL(),x);}
+	        		//if no resutls, go to the protocol service directly
+					if (items==null || items.size()==0) 
+		        		items = pcli.searchRDF_XML(new URL(resourceDescription.getQueryURL()),term);
+        		}
         		if (items!=null && items.size()>0) 
         			convertResourceResult(items,source,results);
+        		
+        		
         		break;
         	}
         	case TBO: {
@@ -118,18 +144,17 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
         		break;
         	}
         	}
-
     		
             return results;
         } catch (RestException x) {
-            System.out.println(String.format("[%s] %s Error connecting to %s",x.getStatus(),x.getMessage(), resourceDescription.getQueryURL()));
-            x.printStackTrace();
-        } catch (MalformedURLException e) {
-            System.out.println("Wrong URL ...");
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("No file found. Assuming connection is down...");
-            e.printStackTrace();
+            String msg = String.format("[%s] %s Error connecting to %s",x.getStatus(),x.getMessage(), resourceDescription.getQueryURL());
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE,msg,x);
+        } catch (MalformedURLException x) {
+        	String msg = "Wrong URL ...";
+        	Logger.getLogger(this.getClass().getName()).log(Level.SEVERE,msg,x);
+        } catch (Exception x) {
+        	String msg = "No file found. Assuming connection is down...";
+        	Logger.getLogger(this.getClass().getName()).log(Level.SEVERE,msg,x);
         } finally {
         }
         return new HashMap<OntologySourceRefObject, List<OntologyTerm>>();
@@ -167,6 +192,7 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
              e.printStackTrace();
          } finally {
         		try { tbclient.logout(); } catch (Exception x) {}
+        		try { tbclient.close(); } catch (Exception x) {}
          }	        
 
          return results;

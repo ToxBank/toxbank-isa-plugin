@@ -52,7 +52,7 @@ public class ToxBankRESTClientTest {
     @Test
     public void getProtocol() {
         ToxBankRESTClient client = new ToxBankRESTClient();
-        Map<OntologySourceRefObject, List<OntologyTerm>> result = client.searchRepository("SEURAT-Protocol-259-1",null,true);
+        Map<OntologySourceRefObject, List<OntologyTerm>> result = client.searchRepository("cell",null,true);
 
         System.out.println("There are " + result.size() + " results");
         for (OntologySourceRefObject source : result.keySet()) {
