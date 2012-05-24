@@ -9,7 +9,10 @@
       <field name="Label" assay-measurement="metabolite profiling" assay-technology="NMR spectroscopy" />
     </fields>
   </resource>
-  <resource name="Toxbank Protocols" abbreviation="TBP" queryURL="http://toxbanktest1.opentox.org:8080/toxbank/protocol" version="0.1">
+  <resource name="Toxbank Protocols" abbreviation="TBP" 
+  	queryURL="http://toxbanktest1.opentox.org:8080/toxbank/protocol" 
+ 	searchServiceURL="https://www.leadscope.com/dev-toxbank-search/" 
+  	version="0.1">
     <fields>
       <field name="Label" />
     </fields>
