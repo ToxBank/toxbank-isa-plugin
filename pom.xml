@@ -7,15 +7,36 @@
     <groupId>net.toxbank</groupId>
     <artifactId>toxbank-isa-plugin</artifactId>
     <version>0.0.2-SNAPSHOT</version>
-    <name>Plugin to search the Toxbank REST services within ISAcreator.</name>
+    <name>ISACreator plugin for ToxBank</name>
+      <description>TPlugin to search the Toxbank REST services within ISAcreator.</description>
+  <url>http://toxbank.github.com/toxbank-isa-plugin</url>
+
     <packaging>bundle</packaging>
+      <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/ToxBank/toxbank-isa-plugin/issues</url>
+  </issueManagement>
+  <ciManagement>
+    <url>http://jenkins.toxbank.net/</url>
+  </ciManagement>
+ <distributionManagement>
+    <snapshotRepository>
+      <id>toxbank-snapshots</id>
+      <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>toxbank-releases</id>
+      <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-releases</url>
+    </repository>
+  </distributionManagement>
 
-
-    <developers>
+ <inceptionYear>2012</inceptionYear>
+ <developers>
         <developer>
             <id>maguire</id>
             <name>Eamonn Maguire</name>
             <email>eamonnmag@gmail.com</email>
+            <url>https://github.com/eamonnmag</url>
             <organization>ISA tools team</organization>
             <organizationUrl>http://isa-tools.org</organizationUrl>
         </developer>
@@ -23,8 +44,9 @@
             <id>vedina</id>
             <name>Nina Jeliazkova</name>
             <email>jeliazkova.nina@gmail.com</email>
-            <organization>ToxBank</organization>
-            <organizationUrl>http://toxbank.net</organizationUrl>
+            <url>https://github.com/vedina</url>
+            <organization>IdeaConsult Ltd.</organization>
+            <organizationUrl>http://ideaconsult.net</organizationUrl>
         </developer>
     </developers>
 
@@ -88,6 +110,11 @@
     </repository>
     </repositories>
 
+  <scm>
+  	<connection>scm:git:git://github.com/ToxBank/toxbank-isa-plugin.git</connection>
+  	<developerConnection>scm:git:git@github.com:ToxBank/toxbank-isa-plugin.git</developerConnection>
+    <url>https://github.com/ToxBank/toxbank-isa-plugin</url>
+  </scm>
     <organization>
     	<name>Toxbank</name>
     	<url>http://toxbank.net</url>
@@ -153,7 +180,14 @@
                     <maxmem>512m</maxmem>
                 </configuration>
             </plugin>
-
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <locales>en</locales>
+        </configuration>
+      </plugin>
         </plugins>
     </build>
 
@@ -169,10 +203,8 @@
               <report>license</report>
               <report>issue-tracking</report>
               <report>project-team</report>
-              <report>scm</report>
               <report>dependencies</report>
-              <report>distribution-management</report>
-			  <report> dependency-convergence</report>
+			  <report>dependency-convergence</report>
               <report>summary</report>
             </reports>
           </reportSet>
