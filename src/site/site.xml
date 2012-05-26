@@ -54,7 +54,7 @@
       </topBarIcon>
 
 	  <googleSearch>
-        <sitesearch>http://github.com/ToxBank/toxbank-isa-plugin</sitesearch>
+        <sitesearch>http://toxbank.github.com/toxbank-isa-plugin/</sitesearch>
       </googleSearch>
 
       <sideBarEnabled>true</sideBarEnabled>
