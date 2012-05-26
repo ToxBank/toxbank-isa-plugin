@@ -210,8 +210,6 @@
               <report>license</report>
               <report>issue-tracking</report>
               <report>project-team</report>
-              <report>dependencies</report>
-			  <report>dependency-convergence</report>
               <report>summary</report>
             </reports>
           </reportSet>
