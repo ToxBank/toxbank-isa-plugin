@@ -19,7 +19,7 @@
       <item name="OpenTox AA" href="http://vedina.github.com/opentox-aa-cli"/>
     </links>
 
-    <menu name="Toxbank API beans">
+    <menu name="ISACreator Toxbank API plugin">
       <item name="Home" href="/index.html"/>
       <item name="Maven dependency" href="/maven.html"/>
       <!-- 
