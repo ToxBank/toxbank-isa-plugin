@@ -1,0 +1,20 @@
+ -----
+ Plugin to search the Toxbank REST services within ISAcreator.
+ -----
+ Background
+ -----
+May 2012
+
+ISAcreator ToxBank plugin
+~~~~~~~  
+Plugin to search the Toxbank REST services within {{{http://isa-tools.org}ISAcreator}}
+  
+   * Use as  {{{maven.html}Maven dependency}}.
+
+   * Download {{{https://github.com/ToxBank/toxbank-isa-plugin/zipball/master}https://github.com/ToxBank/toxbank-isa-plugin/zipball/master}}
+   
+   * Download from the {{{http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;quick~toxbank-isa-pligin}Maven repository}}
+      
+   * View source at  {{{https://github.com/ToxBank/toxbank-isa-plugin}GitHub}}
+   
+   * {{{./apidocs/index.html}JavaDoc}}

@@ -1,0 +1,55 @@
+ -----
+ The Java ToxBank API client software
+ -----
+ Background
+ -----
+ May 2012
+
+ISAcreator ToxBank plugin
+~~~~~~~  
+ 
+ Plugin to search the Toxbank REST services within {{{http://isa-tools.org}ISAcreator}}
+ 
+[images/protocols.png] 
+
+* Code
+  
+  {{{https://github.com/ToxBank/toxbank-isa-plugin}GitHub}}
+  
+* Maven
+    
+ Use as {{{http://maven.apache.org}Maven}} dependency:
+
+---------------------------------------
+
+	No stable release yet
+	
+    <repository>
+        <id>toxbank-releases</id>
+        <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-releases/</url>
+        <snapshots>
+  	       <enabled>false</enabled>
+         </snapshots>
+    </repository>
+    
+----------------------------------------  
+
+  {{{http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-snapshots/}Snapshots}}
+
+---------------------------------------
+
+	<dependency>
+      <groupId>net.toxbank</groupId>
+      <artifactId>toxbank-isa-plugin</artifactId>
+      <version>0.0.2-SNAPSHOT</version>
+   </dependency>
+   
+    <repository>
+        <id>toxbank-snapshots</id>
+        <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-snapshots</url>
+        <snapshots>
+               <enabled>true</enabled>
+        </snapshots>
+    </repository>
+----------------------------------------
+
