@@ -107,7 +107,7 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
 	        		if (resourceDescription.getSearchServiceURL()!=null) 
 	        		try {
 	        			//try the search service
-	        			List<URL> urls = tbclient.getSearchClient().searchURI(new URL(String.format("%ssearch",resourceDescription.getSearchServiceURL())),term);
+	        			List<URL> urls = tbclient.getSearchClient().searchURI(new URL(String.format("%ssearch?resourceType=protocol",resourceDescription.getSearchServiceURL())),term);
 	        			if (urls!=null) {
 	        				items = new ArrayList<Protocol>();
 	        				for (URL url : urls) try {
