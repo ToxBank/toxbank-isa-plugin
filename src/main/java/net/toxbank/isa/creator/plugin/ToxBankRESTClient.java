@@ -313,7 +313,7 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
             	 if (user.getHomepage()!=null) {
             		 String url = user.getHomepage().toExternalForm();
             		 if (url.startsWith("http")) url = String.format("<a href='%s'>%s</a>", url,url);
-            		 ontologyTerm.addToComments("WWW",user.getHomepage().toExternalForm());
+            		 ontologyTerm.addToComments("WWW",url);
             	 }
             	 if (user.getEmail()!=null) ontologyTerm.addToComments("e-mail",user.getEmail());
             	 if (user.getWeblog()!=null) ontologyTerm.addToComments("Blog",user.getWeblog().toExternalForm());
@@ -328,7 +328,11 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
             	 if (protocol.getProject()!=null) ontologyTerm.addToComments("Consortium",protocol.getProject().getTitle());
             	 //if (protocol.getSubmissionDate()!=null) ontologyTerm.addToComments("Submitted",new Date(protocol.getSubmissionDate())));
             	 if (protocol.getStatus()!=null) ontologyTerm.addToComments("Status",protocol.getStatus().toString());
-            	 if (protocol.getResourceURL()!=null) ontologyTerm.addToComments("WWW",protocol.getResourceURL().toExternalForm());
+            	 if (protocol.getResourceURL()!=null) {
+            		 String url = protocol.getResourceURL().toExternalForm();
+            		 if (url.startsWith("http")) url = String.format("<a href='%s' title='%s'>%s</a>", url,url,url);
+            		 ontologyTerm.addToComments("WWW",url);
+            	 }
             	 
              } else if (resource instanceof Project) {
             	 Project project = (Project) resource;
