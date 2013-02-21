@@ -81,7 +81,7 @@ public class ToxBankRESTClientTest {
         recommendedOntologies.put("TBK",new RecommendedOntology(new Ontology("TBK","0.1","TBK","TBK")));
         Map<OntologySourceRefObject, List<OntologyTerm>> result = 
         	
-        			client.searchRepository("staining",recommendedOntologies,false);
+        			client.searchRepository("p53",recommendedOntologies,false);
 
 
         for (OntologySourceRefObject source : result.keySet()) {

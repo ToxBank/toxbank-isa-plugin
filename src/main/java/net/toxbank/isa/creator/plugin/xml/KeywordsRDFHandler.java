@@ -32,7 +32,9 @@ public class KeywordsRDFHandler {
     	if (model==null) {
     		model = ModelFactory.createDefaultModel();    	
 	    	if (!(xml.startsWith("http") && !xml.startsWith("file"))) {
-	    		FileInputStream in = new FileInputStream(new File(xml));
+	    		File file = new File(xml);
+	    		//System.out.println(file.getAbsolutePath());
+	    		FileInputStream in = new FileInputStream(file);
 	    		try {
 	    			model.read(in, null);
 	    		} finally {
@@ -85,7 +87,9 @@ public class KeywordsRDFHandler {
 		List<OntologyTerm> terms = new ArrayList<OntologyTerm>();
 
 		//term = term.toLowerCase();
-		Query query = QueryFactory.create(String.format(sparqlQuery,TOXBANK.URI,ISA_URI,term,term,term,term,term,term));
+		String sparql = String.format(sparqlQuery,TOXBANK.URI,ISA_URI,term,term,term,term,term,term);
+		//System.out.println(sparql);
+		Query query = QueryFactory.create(sparql);
 		QueryExecution qe = QueryExecutionFactory.create(query,model);
 		ResultSet rs = qe.execSelect();
 		int n = 0;
