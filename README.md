@@ -22,7 +22,7 @@ Plugin requirements:
 
 * The default ISACreator behaviour is to hide the investigation page, when only a single study is present. Since ToxBank custom fields are in the investigation page, the customized ToxBank ISACreator is compiled with an option to always show the investigation page in src/man/resources/defaultsettings.properties
 
-* ToxBank custom investigation.xml
+* ToxBank custom [investigation.xml](https://github.com/ToxBank/isa2rdf/blob/master/isa2rdf/isa2rdf-cli/src/main/resources/toxbank-config/investigation.xml)
 
 Build :
 ------------------
