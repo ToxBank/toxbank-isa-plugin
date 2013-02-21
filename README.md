@@ -8,9 +8,9 @@ ISACreator.SEURAT
 
 * ISACreator.SEURAT is based on ISACreator 1.6.x, customized for [ToxBank](www.toxbank.net)
 
-* [Download ISACreator.SEURAT Windows installer](http://www.ideaconsult.net/downloads/ISAcreator.SEURAT/ISAcreator.SEURAT-v1.6.2-setup.exe)
+* [Download ISACreator.SEURAT 1.6.2 Windows installer](http://www.ideaconsult.net/downloads/ISAcreator.SEURAT/ISAcreator.SEURAT-v1.6.2-setup.exe)
 
-* [Download ISACreator.SEURAT OS independent zip archive](http://www.ideaconsult.net/downloads/ISAcreator.SEURAT/ISAcreator.SEURAT-v1.6.2.zip)
+* [Download ISACreator.SEURAT 1.6.2 OS independent zip archive](http://www.ideaconsult.net/downloads/ISAcreator.SEURAT/ISAcreator.SEURAT-v1.6.2.zip)
 
 
 Plugin requirements:
