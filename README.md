@@ -3,6 +3,11 @@ toxbank-isa-plugin
 
 This is a plugin to search the [ToxBank](http://www.toxbank.net) REST services within [ISAcreator](http://isatools.wordpress.com/tag/isacreator/).
 
+## References
+
+* The ToxBank Warehouse [publication](http://onlinelibrary.wiley.com/doi/10.1002/minf.201200114/abstract)
+* [ToxBank API](http://api.toxbank.net/index.php)
+
 ISACreator.SEURAT 
 -----------------
 
