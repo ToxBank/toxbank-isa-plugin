@@ -1,12 +1,12 @@
 toxbank-isa-plugin
 ==================
 
-This is a plugin to search the [ToxBank](www.toxbank.net) REST services within [ISAcreator](http://isatools.wordpress.com/tag/isacreator/).
+This is a plugin to search the [ToxBank](http://www.toxbank.net) REST services within [ISAcreator](http://isatools.wordpress.com/tag/isacreator/).
 
 ISACreator.SEURAT 
 -----------------
 
-* ISACreator.SEURAT is based on ISACreator 1.6.x, customized for [ToxBank](www.toxbank.net)
+* ISACreator.SEURAT is based on ISACreator 1.6.x, customized for [ToxBank](http://ww.toxbank.net)
 
 * [Download ISACreator.SEURAT 1.6.2 Windows installer](http://www.ideaconsult.net/downloads/ISAcreator.SEURAT/ISAcreator.SEURAT-v1.6.2-setup.exe)
 
