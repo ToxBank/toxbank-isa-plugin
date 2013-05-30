@@ -89,7 +89,11 @@
             <id>mvnsearch</id>
             <url>http://www.mvnsearch.org/maven2/</url>
         </repository>
-
+	<!--  isa-tools -->
+    <repository>
+      <id>oerc</id>
+      <url>http://frog.oerc.ox.ac.uk:8080/nexus-2.1.2/content/repositories/releases/</url>
+    </repository>
 	<!-- Toxbank -->
 	<repository>
       <id>ambit-plovdiv</id>
@@ -170,23 +174,23 @@
 				
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                    <executable>apt</executable>
-                    <fork>true</fork>
-                    <debug>true</debug>
-                    <compilerArguments>
-                        <s>${project.build.directory}</s>
-                    </compilerArguments>
-                    <meminitial>128m</meminitial>
-                    <maxmem>512m</maxmem>
-                </configuration>
-            </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <fork>true</fork>
+          <debug>true</debug>
+          <compilerArguments>
+            <s>${project.build.directory}</s>
+          </compilerArguments>
+          <meminitial>128m</meminitial>
+          <maxmem>512m</maxmem>
+        </configuration>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
