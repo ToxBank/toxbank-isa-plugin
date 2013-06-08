@@ -107,17 +107,17 @@ public class KeywordsRDFHandler {
 			RDFNode category = qs.get("categoryLabel");
 
 			
-        	OntologyTerm oterm = new OntologyTerm(b==null?null:b.isLiteral()?((Literal)b).getString():"",null,source);
+        	OntologyTerm oterm = new OntologyTerm(b==null?null:b.isLiteral()?((Literal)b).getString():"",null,"",source);
         	
         	String categoryLabel = category==null?null:category.isResource()?((Resource)category).getURI():
         			category.isLiteral()?((Literal)category).getString():category.toString();
         	
         	if (categoryLabel!=null) oterm.addToComments("Category", categoryLabel);
         	if (a!=null) {
-        		oterm.setOntologySourceAccession(a.isURIResource()?((Resource)a).getURI():"");
+        		oterm.setOntologyTermAccession(a.isURIResource()?((Resource)a).getURI():"");
         		oterm.setOntologyPurl(source.getSourceFile()+"/");
-        		oterm.setOntologySourceAccession(a.isURIResource()?((Resource)a).getURI():"");
-        		oterm.setOntologyTermName(String.format("%s:%s",source.getSourceName(),oterm.getOntologySourceAccession()));
+        		oterm.setOntologyTermAccession(a.isURIResource()?((Resource)a).getURI():"");
+        		oterm.setOntologyTermName(String.format("%s:%s",source.getSourceName(),oterm.getOntologyTermAccession()));
         		
         		StringBuilder labels = new StringBuilder();
         		StmtIterator sti = model.listStatements((Resource)a,altLabel,(Literal)null);
@@ -137,7 +137,7 @@ public class KeywordsRDFHandler {
         	}
         	if (b!=null) {
         		oterm.addToComments("Label", b.isLiteral()?((Literal)b).getString():"");
-        		oterm.setOntologySourceAccession(String.format("[%s] %s",
+        		oterm.setOntologyTermAccession(String.format("[%s] %s",
         						categoryLabel==null?"":categoryLabel, 
         						b.isLiteral()?((Literal)b).getString():""));
         	}

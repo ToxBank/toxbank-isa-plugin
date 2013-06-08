@@ -39,7 +39,7 @@ public class ToxBankRESTClientTest {
                 		term.getComments(),
                 		term.getOntologyPurl(),
                 		term.getOntologySource(),
-                		term.getOntologySourceAccession(),
+                		term.getOntologyTermAccession(),
                 		term.getOntologyVersionId(),
                 		term.getOntologySourceInformation()
                 		));
@@ -66,7 +66,7 @@ public class ToxBankRESTClientTest {
                 		term.getComments(),
                 		term.getOntologyPurl(),
                 		term.getOntologySource(),
-                		term.getOntologySourceAccession(),
+                		term.getOntologyTermAccession(),
                 		term.getOntologyVersionId(),
                 		term.getOntologySourceInformation()
                 		));
@@ -90,7 +90,7 @@ public class ToxBankRESTClientTest {
             for(OntologyTerm term : result.get(source)) {
             	 System.out.println(String.format("%s\tLabel=%s\t(%s)\t%s",
             			 term.getUniqueId(),
-            			 term.getOntologySourceAccession(),
+            			 term.getOntologyTermAccession(),
             			 term.getComments().get("Alias"),
             			 term.getComments().get("Definition")
             			 ));
