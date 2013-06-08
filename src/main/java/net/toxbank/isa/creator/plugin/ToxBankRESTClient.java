@@ -25,7 +25,7 @@ import net.toxbank.isa.creator.plugin.xml.KeywordsRDFHandler;
 import net.toxbank.isa.creator.plugin.xml.ResourceXMLHandler;
 
 import org.isatools.isacreator.configuration.RecommendedOntology;
-import org.isatools.isacreator.gui.ApplicationManager;
+import org.isatools.isacreator.managers.ApplicationManager;
 import org.isatools.isacreator.ontologymanager.OntologySourceRefObject;
 import org.isatools.isacreator.ontologymanager.common.OntologyTerm;
 import org.isatools.isacreator.plugins.host.service.PluginOntologyCVSearch;
@@ -285,18 +285,18 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
 
     	ArrayList<OntologyTerm> terms = new ArrayList<OntologyTerm>();
     	 for(IToxBankResource resource:resources) {
-             OntologyTerm ontologyTerm = new OntologyTerm(resource.getTitle(),null, source);
+             OntologyTerm ontologyTerm = new OntologyTerm(resource.getTitle(),null,"", source);
              ontologyTerm.setOntologyPurl(source.getSourceFile()+"/");
-             ontologyTerm.setOntologySourceAccession(resource.getResourceURL().toExternalForm());
+             ontologyTerm.setOntologyTermAccession(resource.getResourceURL().toExternalForm());
             // ontologyTerm.addToComments("Organisation", user.getOrganisations().toString());
-             ontologyTerm.setOntologyTermName(String.format("%s:%s",source.getSourceName(),ontologyTerm.getOntologySourceAccession()));
+             ontologyTerm.setOntologyTermName(String.format("%s:%s",source.getSourceName(),ontologyTerm.getOntologyTermAccession()));
              if (resource instanceof User) {
             	 User user = (User) resource;
             	 String person = String.format("%s %s %s",
             			 user.getTitle()==null?"":user.getTitle(),
             			 user.getFirstname()==null?"":user.getFirstname(),
             			 user.getLastname()==null?"":user.getLastname());
-            	 ontologyTerm.setOntologySourceAccession(person);
+            	 ontologyTerm.setOntologyTermAccession(person);
             	 ontologyTerm.addToComments("Name",person);
             	 if (user.getOrganisations()!=null) {
             		 StringBuilder b = new StringBuilder();
@@ -319,7 +319,7 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
             	 if (user.getWeblog()!=null) ontologyTerm.addToComments("Blog",user.getWeblog().toExternalForm());
              } else if (resource instanceof Protocol) {
             	 Protocol protocol = (Protocol) resource;
-            	 ontologyTerm.setOntologySourceAccession(resource.getTitle());
+            	 ontologyTerm.setOntologyTermAccession(resource.getTitle());
             	 if (protocol.getIdentifier()!=null) ontologyTerm.addToComments("Protocol identifier",protocol.getIdentifier());
             	 if (protocol.getTitle()!=null) ontologyTerm.addToComments("Name",protocol.getTitle());
             	 if (protocol.getAbstract()!=null) ontologyTerm.addToComments("Abstract",protocol.getAbstract());
@@ -336,10 +336,10 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
             	 
              } else if (resource instanceof Project) {
             	 Project project = (Project) resource;
-            	 ontologyTerm.setOntologySourceAccession(resource.getTitle());
+            	 ontologyTerm.setOntologyTermAccession(resource.getTitle());
             	 ontologyTerm.addToComments("Consortium name",project.getTitle());
              } else if (resource instanceof Organisation) {
-            	 ontologyTerm.setOntologySourceAccession(resource.getTitle());
+            	 ontologyTerm.setOntologyTermAccession(resource.getTitle());
             	 ontologyTerm.addToComments("Organisation name",resource.getTitle());
              }
              terms.add(ontologyTerm);
