@@ -37,5 +37,9 @@ Build :
 
      mvn clean assembly:assembly -P toxbank
 
+Screenshot :
+------------------
+
+<img src='screenshot.png'>
 
 
