@@ -286,11 +286,13 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
     	ArrayList<OntologyTerm> terms = new ArrayList<OntologyTerm>();
     	 for(IToxBankResource resource:resources) {
              OntologyTerm ontologyTerm = new OntologyTerm(resource.getTitle(),null,"", source);
-             ontologyTerm.setOntologyPurl(source.getSourceFile()+"/");
+
              ontologyTerm.setOntologyTermAccession(resource.getResourceURL().toExternalForm());
+        	 ontologyTerm.setOntologyPurl(source.getSourceFile()+"/" + ontologyTerm.getOntologyTermAccession());
             // ontologyTerm.addToComments("Organisation", user.getOrganisations().toString());
-             ontologyTerm.setOntologyTermName(ontologyTerm.getOntologyTermAccession());
+             
              if (resource instanceof User) {
+            	 ontologyTerm.setOntologyTermName(ontologyTerm.getOntologyTermAccession());
             	 User user = (User) resource;
             	 String person = String.format("%s %s %s",
             			 user.getTitle()==null?"":user.getTitle(),
@@ -319,7 +321,8 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
             	 if (user.getWeblog()!=null) ontologyTerm.addToComments("Blog",user.getWeblog().toExternalForm());
              } else if (resource instanceof Protocol) {
             	 Protocol protocol = (Protocol) resource;
-            	 ontologyTerm.setOntologyTermAccession(resource.getTitle());
+            	 ontologyTerm.setOntologyTermName(ontologyTerm.getOntologyTermAccession());
+            	 ontologyTerm.setOntologyTermAccession(ontologyTerm.getOntologyTermAccession());
             	 if (protocol.getIdentifier()!=null) ontologyTerm.addToComments("Protocol identifier",protocol.getIdentifier());
             	 if (protocol.getTitle()!=null) ontologyTerm.addToComments("Name",protocol.getTitle());
             	 if (protocol.getAbstract()!=null) ontologyTerm.addToComments("Abstract",protocol.getAbstract());
@@ -336,10 +339,12 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
             	 
              } else if (resource instanceof Project) {
             	 Project project = (Project) resource;
-            	 ontologyTerm.setOntologyTermAccession(resource.getTitle());
+            	 ontologyTerm.setOntologyTermName(ontologyTerm.getOntologyTermAccession());
+            	 ontologyTerm.setOntologyTermAccession(ontologyTerm.getOntologyTermAccession());
             	 ontologyTerm.addToComments("Consortium name",project.getTitle());
              } else if (resource instanceof Organisation) {
-            	 ontologyTerm.setOntologyTermAccession(resource.getTitle());
+            	 ontologyTerm.setOntologyTermName(ontologyTerm.getOntologyTermAccession());
+            	 ontologyTerm.setOntologyTermAccession(ontologyTerm.getOntologyTermAccession());
             	 ontologyTerm.addToComments("Organisation name",resource.getTitle());
              }
              terms.add(ontologyTerm);
