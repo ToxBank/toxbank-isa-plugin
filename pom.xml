@@ -8,7 +8,7 @@
     <artifactId>toxbank-isa-plugin</artifactId>
     <version>0.0.3-SNAPSHOT</version>
     <name>ISACreator plugin for ToxBank</name>
-    <description>TPlugin to search the Toxbank REST services within ISAcreator.</description>
+    <description>Plugin to search the Toxbank REST services within ISAcreator.</description>
     <url>http://toxbank.github.com/toxbank-isa-plugin</url>
 
     <packaging>bundle</packaging>
