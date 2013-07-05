@@ -116,8 +116,9 @@ public class KeywordsRDFHandler {
         	if (a!=null) {
         		oterm.setOntologyTermAccession(a.isURIResource()?((Resource)a).getURI():"");
         		oterm.setOntologyPurl(source.getSourceFile()+"/");
+        		oterm.setOntologyTermName(null);
         		oterm.setOntologyTermAccession(a.isURIResource()?((Resource)a).getURI():"");
-        		oterm.setOntologyTermName(String.format("%s:%s",source.getSourceName(),oterm.getOntologyTermAccession()));
+        		
         		
         		StringBuilder labels = new StringBuilder();
         		StmtIterator sti = model.listStatements((Resource)a,altLabel,(Literal)null);
