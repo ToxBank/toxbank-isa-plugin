@@ -6,7 +6,7 @@
 
     <groupId>net.toxbank</groupId>
     <artifactId>toxbank-isa-plugin</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
     <name>ISACreator plugin for ToxBank</name>
     <description>Plugin to search the Toxbank REST services within ISAcreator.</description>
     <url>http://toxbank.github.com/toxbank-isa-plugin</url>
