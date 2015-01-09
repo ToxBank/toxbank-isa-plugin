@@ -34,10 +34,10 @@ public class ToxBankRESTClientTest {
             for(OntologyTerm term : result.get(source)) {
                 System.out.println(
                 		String.format("getUniqueId=%s\ngetOntologyTermName=%s\ngetComments=%s\ngetOntologyPurl=%s\ngetOntologySource=%s\ngetOntologySourceAccession=%s\ngetOntologyVersionId=%s\ngetOntologySourceInformation=%s\n\n",
-                		term.getUniqueId(),
+                		term.getShortForm(),
                 		term.getOntologyTermName(),
                 		term.getComments(),
-                		term.getOntologyPurl(),
+                		term.getOntologyTermURI(),
                 		term.getOntologySource(),
                 		term.getOntologyTermAccession(),
                 		term.getOntologyVersionId(),
@@ -61,10 +61,10 @@ public class ToxBankRESTClientTest {
             for(OntologyTerm term : result.get(source)) {
                 System.out.println(
                 		String.format("getUniqueId=%s\ngetOntologyTermName=%s\ngetComments=%s\ngetOntologyPurl=%s\ngetOntologySource=%s\ngetOntologySourceAccession=%s\ngetOntologyVersionId=%s\ngetOntologySourceInformation=%s\n\n",
-                		term.getUniqueId(),
+                		term.getShortForm(),
                 		term.getOntologyTermName(),
                 		term.getComments(),
-                		term.getOntologyPurl(),
+                		term.getOntologyTermURI(),
                 		term.getOntologySource(),
                 		term.getOntologyTermAccession(),
                 		term.getOntologyVersionId(),
@@ -89,7 +89,7 @@ public class ToxBankRESTClientTest {
 
             for(OntologyTerm term : result.get(source)) {
             	 System.out.println(String.format("%s\tLabel=%s\t(%s)\t%s",
-            			 term.getUniqueId(),
+            			 term.getShortForm(),
             			 term.getOntologyTermAccession(),
             			 term.getComments().get("Alias"),
             			 term.getComments().get("Definition")

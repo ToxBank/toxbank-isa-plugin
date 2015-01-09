@@ -1,326 +1,314 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.toxbank</groupId>
-    <artifactId>toxbank-isa-plugin</artifactId>
-    <version>0.0.3</version>
-    <name>ISACreator plugin for ToxBank</name>
-    <description>Plugin to search the Toxbank REST services within ISAcreator.</description>
-    <url>http://toxbank.github.com/toxbank-isa-plugin</url>
+	<groupId>net.toxbank</groupId>
+	<artifactId>toxbank-isa-plugin</artifactId>
+	<version>0.0.4-SNAPSHOT</version>
+	<name>ISACreator plugin for ToxBank</name>
+	<description>Plugin to search the Toxbank REST services within ISAcreator.</description>
+	<url>http://toxbank.github.com/toxbank-isa-plugin</url>
 
-    <packaging>bundle</packaging>
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/ToxBank/toxbank-isa-plugin/issues</url>
-    </issueManagement>
-    <ciManagement>
-        <url>http://jenkins.toxbank.net/</url>
-    </ciManagement>
-    <distributionManagement>
-        <snapshotRepository>
-            <id>toxbank-snapshots</id>
-            <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>toxbank-releases</id>
-            <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-releases</url>
-        </repository>
-    </distributionManagement>
-    <licenses>
-        <license>
-            <name>LGPL3</name>
-            <url>http://www.gnu.org/licenses/lgpl.txt</url>
-            <distribution>repo</distribution>
-            <comments>LGPL 3</comments>
-        </license>
-    </licenses>
-    <inceptionYear>2012</inceptionYear>
-    <developers>
-        <developer>
-            <id>maguire</id>
-            <name>Eamonn Maguire</name>
-            <email>eamonnmag@gmail.com</email>
-            <url>https://github.com/eamonnmag</url>
-            <organization>ISA tools team</organization>
-            <organizationUrl>http://isa-tools.org</organizationUrl>
-        </developer>
-        <developer>
-            <id>vedina</id>
-            <name>Nina Jeliazkova</name>
-            <email>jeliazkova.nina@gmail.com</email>
-            <url>https://github.com/vedina</url>
-            <organization>IdeaConsult Ltd.</organization>
-            <organizationUrl>http://ideaconsult.net</organizationUrl>
-        </developer>
-    </developers>
+	<packaging>bundle</packaging>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/ToxBank/toxbank-isa-plugin/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<url>http://jenkins.toxbank.net/</url>
+	</ciManagement>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>toxbank-snapshots</id>
+			<url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>toxbank-releases</id>
+			<url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-releases</url>
+		</repository>
+	</distributionManagement>
+	<licenses>
+		<license>
+			<name>LGPL3</name>
+			<url>http://www.gnu.org/licenses/lgpl.txt</url>
+			<distribution>repo</distribution>
+			<comments>LGPL 3</comments>
+		</license>
+	</licenses>
+	<inceptionYear>2012</inceptionYear>
+	<developers>
+		<developer>
+			<id>maguire</id>
+			<name>Eamonn Maguire</name>
+			<email>eamonnmag@gmail.com</email>
+			<url>https://github.com/eamonnmag</url>
+			<organization>ISA tools team</organization>
+			<organizationUrl>http://isa-tools.org</organizationUrl>
+		</developer>
+		<developer>
+			<id>vedina</id>
+			<name>Nina Jeliazkova</name>
+			<email>jeliazkova.nina@gmail.com</email>
+			<url>https://github.com/vedina</url>
+			<organization>IdeaConsult Ltd.</organization>
+			<organizationUrl>http://ideaconsult.net</organizationUrl>
+		</developer>
+	</developers>
 
-    <repositories>
+	<repositories>
 
-        <repository>
-            <id>oerc</id>
-            <url>http://frog.oerc.ox.ac.uk:8080/nexus-2.1.2/content/repositories/releases/</url>
-        </repository>
+		<repository>
+			<id>central</id>
+			<url>https://repo1.maven.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
 
-        <repository>
-            <id>m2repo</id>
-            <name>EBI repo</name>
-            <url>http://www.ebi.ac.uk/~maven/m2repo</url>
-        </repository>
+		<repository>
+			<id>oerc</id>
+			<url>http://frog.oerc.ox.ac.uk:8080/nexus-2.1.2/content/groups/oerc</url>
+		</repository>
 
-        <repository>
-            <id>mvnrepository</id>
-            <url>http://www.mvnrepository.com/</url>
-        </repository>
+		<repository>
+			<id>mvnrepository</id>
+			<url>http://www.mvnrepository.com/</url>
+		</repository>
 
-        <repository>
-            <id>atlassian</id>
-            <url>https://m2proxy.atlassian.com/repository/public</url>
-        </repository>
+		<repository>
+			<id>atlassian</id>
+			<url>https://m2proxy.atlassian.com/repository/public</url>
+		</repository>
 
-        <repository>
-            <id>java-dev</id>
-            <url>http://download.java.net/maven/2/</url>
-        </repository>
+		<repository>
+			<id>java-dev</id>
+			<url>http://download.java.net/maven/2/</url>
+		</repository>
+		<!-- isa-tools -->
 
-        <repository>
-            <id>mvnsearch</id>
-            <url>http://www.mvnsearch.org/maven2/</url>
-        </repository>
-        <!--  isa-tools -->
+		<!-- Toxbank -->
+		<repository>
+			<id>ambit-plovdiv</id>
+			<url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/thirdparty</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>ambit-plovdiv-releases</id>
+			<url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>ambit-plovdiv-snapshots</id>
+			<url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>toxbank-releases</id>
+			<url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-releases</url>
+		</repository>
+		<repository>
+			<id>toxbank-snapshots</id>
+			<url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
-        <!-- Toxbank -->
-        <repository>
-            <id>ambit-plovdiv</id>
-            <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/thirdparty</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>ambit-plovdiv-releases</id>
-            <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/releases</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>ambit-plovdiv-snapshots</id>
-            <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>toxbank-releases</id>
-            <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-releases</url>
-        </repository>
-        <repository>
-            <id>toxbank-snapshots</id>
-            <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+	<scm>
+		<connection>scm:git:git://github.com/ToxBank/toxbank-isa-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com:ToxBank/toxbank-isa-plugin.git</developerConnection>
+		<url>https://github.com/ToxBank/toxbank-isa-plugin</url>
+	</scm>
+	<organization>
+		<name>Toxbank</name>
+		<url>http://toxbank.net</url>
+	</organization>
+	<build>
+		<plugins>
 
-    <scm>
-        <connection>scm:git:git://github.com/ToxBank/toxbank-isa-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:ToxBank/toxbank-isa-plugin.git</developerConnection>
-        <url>https://github.com/ToxBank/toxbank-isa-plugin</url>
-    </scm>
-    <organization>
-        <name>Toxbank</name>
-        <url>http://toxbank.net</url>
-    </organization>
-    <build>
-        <plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.2.0</version>
+				<extensions>true</extensions>
 
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.0.0</version>
-                <extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Import-Package>
+							org.apache.commons.logging.*,
+							!org.apache.axis.*,
+							!com.sun.jdmk.*,
+							!javax.mail.*,
+							!org.junit.*, <!-- Why junit runtime? -->
+							!com.sun.msv.*,
+							!javax.jms.*,
+							!junit.*, <!-- uk.ebi.ac:ols has compile 
+								junit dependency -->
+							!org.relaxng.*,
+							!org.apache.xml.resolver.*,
+							!com.hp.hpl.jena.util.junit.*, <!-- Why junit runtime? -->
+							!javax.jmdns.*,
+							!sun.io.*,
+							!com.hp.hpl.jena.sparql.modify.op.*,  <!-- 
+								This is not found in arq after version 2.8.3 -->
+							!com.ibm.uvm.tools.*,
+							!com.hp.hpl.jena.sparql.lang.sparql.*, <!-- Who 
+								is using ancient arq-2* ??? -->
+							!org.apache.log.*, <!-- What's this ??? -->
+							*
+						</Import-Package>
+						<Export-Package>net.toxbank.isa.creator.plugin</Export-Package>
+						<Bundle-Activator>net.toxbank.isa.creator.plugin.Activator</Bundle-Activator>
+						<Embed-Dependency>
+							*;scope=compile|runtime
+						</Embed-Dependency>
 
-                <configuration>
-                    <instructions>
-                        <Import-Package>
-                            org.apache.commons.logging.*,
-                            !org.apache.axis.*,
-                            !com.sun.jdmk.*,
-                            !javax.mail.*,
-                            !org.junit.*, <!-- Why junit runtime?  -->
-                            !com.sun.msv.*,
-                            !javax.jms.*,
-                            !junit.*, <!-- uk.ebi.ac:ols has compile junit dependency -->
-                            !org.relaxng.*,
-                            !org.apache.xml.resolver.*,
-                            !com.hp.hpl.jena.util.junit.*, <!-- Why junit runtime?  -->
-                            !javax.jmdns.*,
-                            !sun.io.*,
-                            !com.hp.hpl.jena.sparql.modify.op.*,  <!-- This is not found in arq after version 2.8.3  -->
-                            !com.ibm.uvm.tools.*,
-                            !com.hp.hpl.jena.sparql.lang.sparql.*, <!-- Who is using ancient arq-2* ??? -->
-                            !org.apache.log.*, <!-- What's this ???  -->
-                            *
-                        </Import-Package>
-                        <Export-Package>net.toxbank.isa.creator.plugin</Export-Package>
-                        <Bundle-Activator>net.toxbank.isa.creator.plugin.Activator</Bundle-Activator>
-                        <Embed-Dependency>
-                            *;scope=compile|runtime
-                        </Embed-Dependency>
+						<Embed-Transitive>true</Embed-Transitive>
 
-                        <Embed-Transitive>true</Embed-Transitive>
+						<Bundle-Vendor>ToxBank</Bundle-Vendor>
+					</instructions>
+				</configuration>
 
-                        <Bundle-Vendor>ToxBank</Bundle-Vendor>
-                    </instructions>
-                </configuration>
+			</plugin>
 
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<fork>true</fork>
+					<debug>true</debug>
+					<compilerArguments>
+						<s>${project.build.directory}</s>
+					</compilerArguments>
+					<meminitial>128m</meminitial>
+					<maxmem>512m</maxmem>
+				</configuration>
+			</plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <fork>true</fork>
-                    <debug>true</debug>
-                    <compilerArguments>
-                        <s>${project.build.directory}</s>
-                    </compilerArguments>
-                    <meminitial>128m</meminitial>
-                    <maxmem>512m</maxmem>
-                </configuration>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.4</version>
+				<configuration>
+					<locales>en</locales>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <locales>en</locales>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.7</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>license</report>
+							<report>issue-tracking</report>
+							<report>project-team</report>
+							<report>summary</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<!-- UML class diagrams -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.1</version>
+				<!-- <docletPath>/path/to/UmlGraph.jar</docletPath> -->
+				<configuration>
+					<source>1.5</source>
+					<aggregate>false</aggregate>
+					<doclet>gr.spinellis.umlgraph.doclet.UmlGraphDoc</doclet>
+					<docletArtifact>
+						<groupId>gr.spinellis</groupId>
+						<artifactId>UmlGraph</artifactId>
+						<version>4.6</version>
+					</docletArtifact>
+					<additionalparam>
+						<!-- http://www.umlgraph.org/doc/cd-opt.html -attributes -views -types 
+							-inferrel -inferdep -quiet -hide java.* -collpackages java.util.* -qualify 
+							-postfixpackage -->
+						-all
+					</additionalparam>
+				</configuration>
+			</plugin>
 
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.4</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>license</report>
-                            <report>issue-tracking</report>
-                            <report>project-team</report>
-                            <report>summary</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <!-- UML class diagrams  -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.7</version>
-                <!-- <docletPath>/path/to/UmlGraph.jar</docletPath> -->
-                <configuration>
-                    <source>1.5</source>
-                    <aggregate>false</aggregate>
-                    <doclet>gr.spinellis.umlgraph.doclet.UmlGraphDoc</doclet>
-                    <docletArtifact>
-                        <groupId>gr.spinellis</groupId>
-                        <artifactId>UmlGraph</artifactId>
-                        <version>4.6</version>
-                    </docletArtifact>
-                    <additionalparam>
-                        <!--  http://www.umlgraph.org/doc/cd-opt.html
-                              -attributes
-                              -views
-                              -types
-                            -inferrel -inferdep -quiet -hide java.*
-                            -collpackages java.util.* -qualify
-                            -postfixpackage
-                            -->
-                        -all
-                    </additionalparam>
-                </configuration>
-            </plugin>
+		</plugins>
+	</reporting>
+	<properties>
+		<junit.version>4.8.1</junit.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
-        </plugins>
-    </reporting>
-    <properties>
-        <junit.version>4.8.1</junit.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+	<dependencies>
+		<!-- <dependency> <groupId>uk.ac.ebi</groupId> <artifactId>jutils</artifactId> 
+			<version>1.4</version> <scope>test</scope> </dependency> -->
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>1.4.0</version>
+			<scope>provided</scope>
+		</dependency>
 
-    <dependencies>
-        <!--
-            <dependency>
-                <groupId>uk.ac.ebi</groupId>
-                <artifactId>jutils</artifactId>
-                <version>1.4</version>
-                <scope>test</scope>
-            </dependency>
-     -->
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.osgi.core</artifactId>
-            <version>1.4.0</version>
-            <scope>provided</scope>
-        </dependency>
+		<dependency>
+			<groupId>org.isatools</groupId>
+			<artifactId>ISAcreator</artifactId>
+			<version>1.7.7</version>
+			<scope>provided</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>org.isatools</groupId>
-            <artifactId>ISAcreator</artifactId>
-            <version>1.7.1</version>
-            <scope>provided</scope>
-        </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.2</version>
+			<scope>test</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.2</version>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>net.toxbank</groupId>
+			<artifactId>toxbank-client-java</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
-        <dependency>
-            <groupId>net.toxbank</groupId>
-            <artifactId>toxbank-client-java</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.1</version>
-
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.0.3</version>
-            <type>jar</type>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.0.3</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
 
 </project>

@@ -288,7 +288,7 @@ public class ToxBankRESTClient implements PluginOntologyCVSearch {
              OntologyTerm ontologyTerm = new OntologyTerm(resource.getTitle(),null,"", source);
 
              ontologyTerm.setOntologyTermAccession(resource.getResourceURL().toExternalForm());
-        	 ontologyTerm.setOntologyPurl(source.getSourceFile()+"/" + ontologyTerm.getOntologyTermAccession());
+        	 ontologyTerm.setOntologyTermIRI(source.getSourceFile()+"/" + ontologyTerm.getOntologyTermAccession());
             // ontologyTerm.addToComments("Organisation", user.getOrganisations().toString());
              
              if (resource instanceof User) {

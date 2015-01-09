@@ -115,7 +115,7 @@ public class KeywordsRDFHandler {
         	if (categoryLabel!=null) oterm.addToComments("Category", categoryLabel);
         	if (a!=null) {
         		oterm.setOntologyTermAccession(a.isURIResource()?((Resource)a).getURI():"");
-        		oterm.setOntologyPurl(source.getSourceFile()+"/");
+        		oterm.setOntologyTermIRI(source.getSourceFile()+"/");
         		oterm.setOntologyTermName(null);
         		oterm.setOntologyTermAccession(a.isURIResource()?((Resource)a).getURI():"");
         		
